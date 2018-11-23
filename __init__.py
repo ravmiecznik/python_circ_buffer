@@ -1,1 +1,2 @@
 from circ_buffer import Cbuffer
+from circ_buffer import ArgLenGreaterThan1

@@ -2,7 +2,7 @@
 author: Rafal Miecznik
 contact: ravmiecznk@gmail.com
 """
-from circ_buffer import Cbuffer
+from circ_buffer import Cbuffer, ArgLenGreaterThan1
 import pytest
 
 
@@ -27,6 +27,11 @@ def test_putchar(cbuffer):
     cbuffer.put(char)
     assert cbuffer.get() == char
 
+def test_excpetion_for_putchar(cbuffer):
+    try:
+        cbuffer.put("long string")
+    except ArgLenGreaterThan1:
+        pass
 
 def test_puts(cbuffer):
     "Test if get string is equal to put string"

@@ -20,6 +20,11 @@ class InputTooBig(CircBufferError):
     pass
 
 
+class ArgLenGreaterThan1(Exception):
+    """
+    """
+    pass
+
 class NotIntegerBufferSizeProvided(CircBufferError):
     """
     exception definition
@@ -97,6 +102,8 @@ class Cbuffer(object):
         :param char:
         :return:
         """
+        if len(char) > 1:
+            raise ArgLenGreaterThan1
         self.buffer[self._tail] = char
         self._tail = (self._tail + 1) % self.size
         if self._available < self.size:
