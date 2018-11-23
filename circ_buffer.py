@@ -40,6 +40,7 @@ class GetsMethodCalledForNonStrType(CircBufferError):
     """
     pass
 
+
 class Cbuffer(object):
     """
     Circular buffer
@@ -80,10 +81,13 @@ class Cbuffer(object):
         self._head = 0
         self._tail = 0
         self.size = self.size
-        #TODO: you can remove below line so __contains__ operator will work but you have to overload __contains__
-        # It must check only "available" amount of data starting from head to tail, or easier: after flush it should be:
+        # TODO: you can remove below line so __contains__ operator will work
+        # but you have to overload __contains__
+        # It must check only "available" amount of data starting from head to
+        # tail, or easier: after flush it should be:
         # cbuffer.flush()
-        # if "string" in buffer -> __contains__: if available and string in self.buffer[self._tail:available]
+        # if "string" in buffer -> __contains__: if available and string in
+        # self.buffer[self._tail:available]
         self.buffer = self.size*['']
         self._available = 0
 
@@ -118,7 +122,8 @@ class Cbuffer(object):
 
     def gets(self, amount=None):
         """
-        gets given amount of oldest elements or all available elements if amount not provided
+        gets given amount of oldest elements or all available elements
+        if amount not provided
         :param amount:
         :return:
         """
@@ -129,12 +134,12 @@ class Cbuffer(object):
             amount = self._available
         tmp_buff = self.get()
         amount -= 1
-        #get_method = self.get
+        # get_method = self.get
         # if not isinstance(tmp_buff, str):
         #     get_method = self._get_as_list
         #     tmp_buff = [tmp_buff]
         while (amount) and self._available:
-            #tmp_buff += get_method()
+            # tmp_buff += get_method()
             tmp_buff += self.get()
             amount -= 1
         return tmp_buff
